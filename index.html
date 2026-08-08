@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0f766e">
-  <meta name="description" content="Modern BMI calculator with BMI, BMR, TDEE, health history and advanced features.">
+  <meta
+    name="description"
+    content="Professional BMI calculator with BMI, BMR, TDEE, history and advanced health features."
+  >
+
   <title>Pro BMI Calculator 2026</title>
 
   <style>
@@ -13,18 +17,17 @@
       --primary-dark: #115e59;
       --accent: #14b8a6;
       --bg: #ecfeff;
-      --card: rgba(255, 255, 255, .76);
+      --card: rgba(255, 255, 255, .78);
       --text: #17202a;
       --muted: #64748b;
       --border: rgba(148, 163, 184, .3);
       --danger: #dc2626;
-      --warning: #ca8a04;
       --shadow: 0 18px 55px rgba(15, 118, 110, .15);
     }
 
     [data-theme="dark"] {
       --bg: #071521;
-      --card: rgba(15, 23, 42, .78);
+      --card: rgba(15, 23, 42, .82);
       --text: #f8fafc;
       --muted: #cbd5e1;
       --border: rgba(148, 163, 184, .25);
@@ -58,7 +61,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      opacity: .75;
+      opacity: .72;
     }
 
     .background-glow {
@@ -397,7 +400,8 @@
     }
 
     @keyframes gaugePulse {
-      0%, 100% {
+      0%,
+      100% {
         filter: saturate(1);
       }
 
@@ -458,15 +462,6 @@
       font-size: 20px;
     }
 
-    .notice {
-      margin-top: 20px;
-      padding: 14px;
-      border-left: 4px solid #eab308;
-      border-radius: 8px;
-      background: rgba(234, 179, 8, .14);
-      font-size: 14px;
-    }
-
     .advanced-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -481,11 +476,25 @@
       background: rgba(20, 184, 166, .08);
     }
 
+    .advanced-box span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .advanced-box strong {
       display: block;
       margin-top: 5px;
       color: var(--primary);
       font-size: 22px;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 14px;
+      border-left: 4px solid #eab308;
+      border-radius: 8px;
+      background: rgba(234, 179, 8, .14);
+      font-size: 14px;
     }
 
     .history-item {
@@ -513,6 +522,42 @@
     summary {
       cursor: pointer;
       font-weight: 700;
+    }
+
+    /*
+      Bottom advertisement
+    */
+
+    .bottom-ad-wrapper {
+      width: 100%;
+      margin: 32px auto 0;
+      padding: 18px 12px 24px;
+      border-top: 1px solid var(--border);
+      background: rgba(255, 255, 255, .4);
+      text-align: center;
+    }
+
+    [data-theme="dark"] .bottom-ad-wrapper {
+      background: rgba(15, 23, 42, .45);
+    }
+
+    .ad-label {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .ad-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 320px;
+      min-height: 50px;
+      max-width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
     }
 
     footer {
@@ -562,6 +607,7 @@
       .topbar,
       .actions,
       #historyCard,
+      .bottom-ad-wrapper,
       footer {
         display: none !important;
       }
@@ -645,6 +691,7 @@
 
         <div id="imperialFields" hidden>
           <label>Height</label>
+
           <div class="input-row">
             <input
               id="heightFt"
@@ -811,7 +858,7 @@
         <details>
           <summary>What is BMI?</summary>
           <p>
-            BMI is a value calculated from weight and height. It is used as a
+            BMI is calculated from body weight and height. It is used as a
             general adult screening measure.
           </p>
         </details>
@@ -843,6 +890,27 @@
     </section>
   </main>
 
+  <!-- Bottom advertisement -->
+  <section class="bottom-ad-wrapper" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+
+    <div class="ad-box">
+      <script>
+        var atOptions = {
+          'key': '67dc3b0938e673e54b6eb15089889c30',
+          'format': 'iframe',
+          'height': 50,
+          'width': 320,
+          'params': {}
+        };
+      </script>
+
+      <script
+        src="https://www.highperformanceformat.com/67dc3b0938e673e54b6eb15089889c30/invoke.js">
+      </script>
+    </div>
+  </section>
+
   <footer>
     © 2026 Pro BMI Calculator · Educational use only
   </footer>
@@ -861,14 +929,19 @@
         ? JSON.parse(storedHistory)
         : [];
 
-      history = Array.isArray(parsedHistory) ? parsedHistory : [];
+      history = Array.isArray(parsedHistory)
+        ? parsedHistory
+        : [];
     } catch (error) {
       history = [];
     }
 
     function saveHistory() {
       try {
-        localStorage.setItem("bmiHistory", JSON.stringify(history));
+        localStorage.setItem(
+          "bmiHistory",
+          JSON.stringify(history)
+        );
       } catch (error) {
         alert("Browser storage unavailable.");
       }
@@ -1012,7 +1085,6 @@
       }
 
       const category = getCategory(bmi);
-
       const minWeight = 18.5 * heightM * heightM;
       const maxWeight = 24.9 * heightM * heightM;
 
@@ -1032,24 +1104,22 @@
           161;
       }
 
-      const activityMultiplier = Number(get("activity").value);
-      const tdee = bmr * activityMultiplier;
+      const tdee = bmr * Number(get("activity").value);
 
       const waist = Number(get("waist").value);
       const targetWeight = Number(get("goalWeight").value);
 
-      let waistRatioText = "--";
+      let waistRatio = "--";
 
       if (
         Number.isFinite(waist) &&
-        waist > 0 &&
         waist >= 40 &&
         waist <= 250
       ) {
-        waistRatioText = (waist / data.heightCm).toFixed(2);
+        waistRatio = (waist / data.heightCm).toFixed(2);
       }
 
-      let targetDifferenceText = "--";
+      let targetDifference = "--";
 
       if (
         Number.isFinite(targetWeight) &&
@@ -1059,17 +1129,13 @@
         const difference = targetWeight - data.weightKg;
 
         if (Math.abs(difference) < .05) {
-          targetDifferenceText = "On target";
+          targetDifference = "On target";
         } else if (difference > 0) {
-          targetDifferenceText = `+${difference.toFixed(1)} kg`;
+          targetDifference = `+${difference.toFixed(1)} kg`;
         } else {
-          targetDifferenceText = `${difference.toFixed(1)} kg`;
+          targetDifference = `${difference.toFixed(1)} kg`;
         }
       }
-
-      const inHealthyRange =
-        data.weightKg >= minWeight &&
-        data.weightKg <= maxWeight;
 
       currentResult = {
         date: new Date().toLocaleString("en-IN"),
@@ -1087,20 +1153,28 @@
       get("healthyRange").textContent =
         `${minWeight.toFixed(1)} - ${maxWeight.toFixed(1)} kg`;
 
-      get("bmr").textContent = `${Math.round(bmr)} kcal`;
-      get("tdee").textContent = `${Math.round(tdee)} kcal`;
-      get("waistRatio").textContent = waistRatioText;
-      get("targetDifference").textContent = targetDifferenceText;
-      get("rangeStatus").textContent = inHealthyRange
-        ? "In range"
-        : "Outside range";
+      get("bmr").textContent =
+        `${Math.round(bmr)} kcal`;
+
+      get("tdee").textContent =
+        `${Math.round(tdee)} kcal`;
+
+      get("waistRatio").textContent = waistRatio;
+      get("targetDifference").textContent = targetDifference;
+
+      get("rangeStatus").textContent =
+        data.weightKg >= minWeight &&
+        data.weightKg <= maxWeight
+          ? "In range"
+          : "Outside range";
 
       const markerPosition = Math.min(
         Math.max((bmi / 50) * 100, 2),
         98
       );
 
-      get("marker").style.left = `${markerPosition}%`;
+      get("marker").style.left =
+        `${markerPosition}%`;
 
       return true;
     }
@@ -1113,7 +1187,8 @@
       get("bmiValue").textContent = "--";
       get("category").textContent = "Enter details";
       get("category").style.background = "var(--primary)";
-      get("message").textContent = "Your result will appear here.";
+      get("message").textContent =
+        "Your result will appear here.";
       get("healthyRange").textContent = "--";
       get("bmr").textContent = "--";
       get("tdee").textContent = "--";
@@ -1209,7 +1284,8 @@
             )
             .join(",")
         )
-        .join("\n");
+        .join("
+");
 
       const blob = new Blob([csv], {
         type: "text/csv;charset=utf-8;"
@@ -1238,10 +1314,7 @@
         `My BMI is ${currentResult.bmi} (${currentResult.category}).`;
 
       try {
-        if (
-          navigator.share &&
-          window.isSecureContext
-        ) {
+        if (navigator.share && window.isSecureContext) {
           await navigator.share({
             title: "My BMI Result",
             text
@@ -1283,37 +1356,16 @@
       }
     }
 
-    get("unit").addEventListener("change", showUnitFields);
-    get("calculateBtn").addEventListener("click", calculateBMI);
-    get("resetBtn").addEventListener("click", resetCalculator);
-    get("saveBtn").addEventListener("click", saveResult);
-    get("shareBtn").addEventListener("click", shareResult);
-    get("printBtn").addEventListener("click", () => window.print());
-    get("exportBtn").addEventListener("click", exportCSV);
-    get("themeBtn").addEventListener("click", toggleTheme);
-
-    document.querySelectorAll("input, select").forEach((element) => {
-      element.addEventListener("input", calculateBMI);
-      element.addEventListener("change", calculateBMI);
-    });
-
-    try {
-      if (localStorage.getItem("theme") === "dark") {
-        document.documentElement.setAttribute("data-theme", "dark");
-        get("themeBtn").textContent = "☀️ Light Mode";
-      }
-    } catch (error) {}
-
     function createParticleBackground() {
       const canvas = get("backgroundCanvas");
 
       if (!canvas) return;
 
-      const reduceMotion = window.matchMedia(
+      const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
-      if (reduceMotion) return;
+      if (reducedMotion) return;
 
       const ctx = canvas.getContext("2d");
 
@@ -1323,12 +1375,18 @@
       let width = 0;
       let height = 0;
       let animationFrame = null;
-      let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      let pixelRatio = Math.min(
+        window.devicePixelRatio || 1,
+        2
+      );
 
       function resizeCanvas() {
         width = window.innerWidth;
         height = window.innerHeight;
-        pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        pixelRatio = Math.min(
+          window.devicePixelRatio || 1,
+          2
+        );
 
         canvas.width = width * pixelRatio;
         canvas.height = height * pixelRatio;
@@ -1349,8 +1407,11 @@
 
       function createParticles() {
         const count = Math.min(
-          95,
-          Math.max(35, Math.floor((width * height) / 18000))
+          90,
+          Math.max(
+            35,
+            Math.floor((width * height) / 18000)
+          )
         );
 
         particles = Array.from({ length: count }, () => ({
@@ -1364,7 +1425,7 @@
         }));
       }
 
-      function particleColor() {
+      function getParticleColor() {
         const dark =
           document.documentElement.getAttribute("data-theme") === "dark";
 
@@ -1376,7 +1437,7 @@
       function animate() {
         ctx.clearRect(0, 0, width, height);
 
-        const color = particleColor();
+        const color = getParticleColor();
 
         particles.forEach((particle) => {
           particle.x += particle.speedX;
@@ -1389,7 +1450,8 @@
           if (particle.y > height + 20) particle.y = -20;
 
           const alpha =
-            particle.alpha + Math.sin(particle.pulse) * .07;
+            particle.alpha +
+            Math.sin(particle.pulse) * .07;
 
           ctx.beginPath();
           ctx.arc(
@@ -1400,7 +1462,9 @@
             Math.PI * 2
           );
 
-          ctx.fillStyle = `${color}${Math.max(.04, alpha)})`;
+          ctx.fillStyle =
+            `${color}${Math.max(.04, alpha)})`;
+
           ctx.fill();
         });
 
@@ -1408,45 +1472,122 @@
 
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
-            const a = particles[i];
-            const b = particles[j];
+            const first = particles[i];
+            const second = particles[j];
 
-            const dx = a.x - b.x;
-            const dy = a.y - b.y;
-            const distance = Math.sqrt((dx * dx) + (dy * dy));
+            const dx = first.x - second.x;
+            const dy = first.y - second.y;
+            const distance = Math.sqrt(
+              (dx * dx) + (dy * dy)
+            );
 
             if (distance < connectionDistance) {
               const opacity =
                 (1 - distance / connectionDistance) * .12;
 
               ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = `${color}${opacity})`;
+              ctx.moveTo(first.x, first.y);
+              ctx.lineTo(second.x, second.y);
+              ctx.strokeStyle =
+                `${color}${opacity})`;
               ctx.lineWidth = 1;
               ctx.stroke();
             }
           }
         }
 
-        animationFrame = requestAnimationFrame(animate);
+        animationFrame =
+          requestAnimationFrame(animate);
       }
 
-      window.addEventListener("resize", resizeCanvas, {
-        passive: true
-      });
+      window.addEventListener(
+        "resize",
+        resizeCanvas,
+        { passive: true }
+      );
 
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          cancelAnimationFrame(animationFrame);
-        } else {
-          animationFrame = requestAnimationFrame(animate);
+      document.addEventListener(
+        "visibilitychange",
+        () => {
+          if (document.hidden) {
+            cancelAnimationFrame(animationFrame);
+          } else {
+            animationFrame =
+              requestAnimationFrame(animate);
+          }
         }
-      });
+      );
 
       resizeCanvas();
-      animationFrame = requestAnimationFrame(animate);
+      animationFrame =
+        requestAnimationFrame(animate);
     }
+
+    get("unit").addEventListener(
+      "change",
+      showUnitFields
+    );
+
+    get("calculateBtn").addEventListener(
+      "click",
+      calculateBMI
+    );
+
+    get("resetBtn").addEventListener(
+      "click",
+      resetCalculator
+    );
+
+    get("saveBtn").addEventListener(
+      "click",
+      saveResult
+    );
+
+    get("shareBtn").addEventListener(
+      "click",
+      shareResult
+    );
+
+    get("printBtn").addEventListener(
+      "click",
+      () => window.print()
+    );
+
+    get("exportBtn").addEventListener(
+      "click",
+      exportCSV
+    );
+
+    get("themeBtn").addEventListener(
+      "click",
+      toggleTheme
+    );
+
+    document
+      .querySelectorAll("input, select")
+      .forEach((element) => {
+        element.addEventListener(
+          "input",
+          calculateBMI
+        );
+
+        element.addEventListener(
+          "change",
+          calculateBMI
+        );
+      });
+
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.setAttribute(
+          "data-theme",
+          "dark"
+        );
+
+        get("themeBtn").textContent =
+          "☀️ Light Mode";
+      }
+    } catch (error) {}
 
     showUnitFields();
     renderHistory();
